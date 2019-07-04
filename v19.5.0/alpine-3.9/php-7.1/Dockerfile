@@ -34,13 +34,13 @@ RUN \
 RUN \
     set -e; \
     apk add --no-cache bison re2c openssl curl tar xz bash; \
-    apk add --no-cache gcc g++ libxml2-dev make file openssl-dev curl-dev libedit-dev libsodium-dev argon2-dev
+    apk add --no-cache gcc g++ libxml2-dev make file openssl-dev curl-dev libedit-dev
 
 WORKDIR /build/php-src
 
 RUN \
     set -e; \
-    ./configure --enable-option-checking=fatal --with-mhash --enable-ftp --enable-mbstring --enable-mysqlnd --with-password-argon2 --with-sodium=shared --with-curl --with-libedit --with-openssl --with-zlib --enable-soap; \
+    ./configure --enable-option-checking=fatal --with-mhash --enable-ftp --enable-mbstring --enable-mysqlnd --with-curl --with-libedit --with-openssl --with-zlib --enable-soap; \
     make -j "$(nproc)"; \
     make install
 
@@ -49,4 +49,4 @@ WORKDIR /
 RUN \
     set -e; \
     rm -rf /build; \
-    apk del gcc g++ libxml2-dev make file openssl-dev curl-dev libedit-dev libsodium-dev argon2-dev
+    apk del gcc g++ libxml2-dev make file openssl-dev curl-dev libedit-dev
